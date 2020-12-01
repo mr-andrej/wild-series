@@ -22,6 +22,11 @@ class Category
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $programs;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +40,18 @@ class Category
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getPrograms(): ?string
+    {
+        return $this->programs;
+    }
+
+    public function setPrograms(string $programs): self
+    {
+        $this->programs = $programs;
 
         return $this;
     }
