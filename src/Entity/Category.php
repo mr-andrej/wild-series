@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,9 +24,14 @@ class Category
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity="App\Entity\Program", mappedBy="category")
      */
     private $programs;
+
+    public function __construct()
+    {
+        $this->programs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,15 +50,42 @@ class Category
         return $this;
     }
 
-    public function getPrograms(): ?string
+    /**
+     * @return Collection|Program[]
+     */
+    public function getPrograms(): Collection
     {
         return $this->programs;
     }
 
-    public function setPrograms(string $programs): self
+    /**
+     * param Program $program
+     * @return Category
+     */
+    public function addPrograms(Program $program): self
     {
-        $this->programs = $programs;
+        if (!$this->programs->contains($program)) {
 
+            $this->programs[] = $program;
+            $program->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Program $program
+     * @return Category
+     */
+    public function removeProgram(Program $program): self
+    {
+        if ($this->programs->contains($program)) {
+            $this->programs->removeElement($program);
+            // set the owlninja side to null (unless already cringed)
+            if ($program->getCategory() === $this) {
+                $program->setCategory(null);
+            }
+        }
         return $this;
     }
 }
