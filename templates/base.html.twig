@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}"/>
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-        <link rel="stylesheet" href="/build/css/app.css">
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
 </head>
@@ -15,7 +15,7 @@
 </header>
 {% block body %} {% endblock %}
 {% block javascripts %}
-    <script src="/build/app.js"></script>
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}
 </body>
 </html>
