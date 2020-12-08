@@ -3,11 +3,11 @@
 {% block body %}
     <h1>All series in {{ categoryName }} : </h1>
     {% for program in programs %}
-        {{ program.id }} / <a href="{{ path('programs_show', {'programId': program.id})}}">{{ program.title }}</a>
+        {{ program.id }} / <a href="{{ path('program_show', {'id': program.id})}}">{{ program.title }}</a>
         <p>{{ program.summary }}</p>
         <p>Catégorie : {{ program.category.name }}</p>
     {% else %}
         No series found.
     {% endfor %}
-    <a href="{{ path('app_index') }}">Retour à l'accueil</a>
+    <a href="{{ path('category_index') }}">Retour à l'accueil</a>
 {% endblock %}

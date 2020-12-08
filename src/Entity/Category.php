@@ -51,9 +51,9 @@ class Category
     }
 
     /**
-     * @return Collection|Program[]
+     * @return ArrayCollection
      */
-    public function getPrograms(): Collection
+    public function getPrograms(): ArrayCollection
     {
         return $this->programs;
     }
@@ -62,14 +62,12 @@ class Category
      * param Program $program
      * @return Category
      */
-    public function addPrograms(Program $program): self
+    public function addProgram(Program $program): self
     {
         if (!$this->programs->contains($program)) {
-
             $this->programs[] = $program;
             $program->setCategory($this);
         }
-
         return $this;
     }
 
